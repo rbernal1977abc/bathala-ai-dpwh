@@ -7,7 +7,135 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* RESET AND BASE STYLES */
+        /* === MONEY POPUP STYLES === */
+        .money-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #000051 0%, #1a237e 50%, #534bae 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: moneyReveal 0.5s ease-out;
+            cursor: pointer;
+        }
+
+        .money-content {
+            text-align: center;
+            animation: moneyPulse 2s infinite;
+            padding: 2rem;
+        }
+
+        .money-text {
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            font-size: 5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #FFD700 0%, #FFED4E 25%, #FFD700 50%, #FFED4E 75%, #FFD700 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 
+                0 0 30px rgba(255, 215, 0, 0.7),
+                0 0 60px rgba(255, 215, 0, 0.5),
+                0 0 90px rgba(255, 215, 0, 0.3);
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+
+        .money-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 1rem;
+            animation: subtitleFloat 3s infinite ease-in-out;
+        }
+
+        .money-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: moneySpin 3s infinite linear;
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8));
+        }
+
+        .money-floating {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(255, 215, 0, 0.6);
+            animation: floatAround 15s infinite linear;
+        }
+
+        .money-floating:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .money-floating:nth-child(2) { top: 20%; right: 15%; animation-delay: 1s; }
+        .money-floating:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 2s; }
+        .money-floating:nth-child(4) { bottom: 15%; right: 25%; animation-delay: 3s; }
+        .money-floating:nth-child(5) { top: 40%; left: 30%; animation-delay: 4s; }
+
+        @keyframes moneyReveal {
+            from { 
+                opacity: 0;
+                transform: scale(1.1);
+            }
+            to { 
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes moneyPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes moneySpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes subtitleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes floatAround {
+            0% { 
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0.3;
+            }
+            25% { 
+                transform: translate(100px, 50px) rotate(90deg);
+                opacity: 0.6;
+            }
+            50% { 
+                transform: translate(50px, 100px) rotate(180deg);
+                opacity: 0.3;
+            }
+            75% { 
+                transform: translate(-50px, 50px) rotate(270deg);
+                opacity: 0.6;
+            }
+            100% { 
+                transform: translate(0, 0) rotate(360deg);
+                opacity: 0.3;
+            }
+        }
+
+        /* === ANIMATIONS FOR MAIN CONTENT ENTRANCE === */
+        .main-content {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
+        }
+
+        .main-content.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* === REST OF YOUR EXISTING CSS === */
         * {
             margin: 0;
             padding: 0;
@@ -28,7 +156,6 @@
             overflow-x: hidden;
         }
 
-        /* HEADER */
         .header {
             background: linear-gradient(135deg, #1a237e, #534bae);
             color: white;
@@ -86,7 +213,6 @@
             cursor: pointer;
         }
 
-        /* MOBILE NAV */
         .mobile-nav {
             position: fixed;
             top: 0;
@@ -123,7 +249,6 @@
             background: #f5f5f5;
         }
 
-        /* MAIN CONTENT */
         .main-content {
             max-width: 1200px;
             margin: 0 auto;
@@ -162,7 +287,6 @@
             font-size: 0.9rem;
         }
 
-        /* STATS GRID */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -206,7 +330,6 @@
             font-size: 0.9rem;
         }
 
-        /* CARDS */
         .card {
             background: white;
             border-radius: 12px;
@@ -230,14 +353,12 @@
             padding: 1.5rem;
         }
 
-        /* DASHBOARD GRID */
         .dashboard-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
         }
 
-        /* RISK ITEMS */
         .risk-item {
             display: flex;
             justify-content: space-between;
@@ -283,7 +404,6 @@
             color: #388e3c;
         }
 
-        /* FORMS */
         .form-group {
             margin-bottom: 1.25rem;
         }
@@ -324,7 +444,6 @@
             width: auto;
         }
 
-        /* BUTTONS */
         .btn {
             padding: 0.75rem 1.5rem;
             border: none;
@@ -357,7 +476,6 @@
             background: #d5d5d5;
         }
 
-        /* UPLOAD AREA */
         .upload-area {
             border: 2px dashed #e0e0e0;
             border-radius: 12px;
@@ -381,7 +499,6 @@
             display: none;
         }
 
-        /* AI AGENTS */
         .agents-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -436,7 +553,6 @@
             border-top: 1px solid #e0e0e0;
         }
 
-        /* FOOTER */
         .footer {
             background: linear-gradient(135deg, #000051, #1a237e);
             color: white;
@@ -462,7 +578,6 @@
             opacity: 0.8;
         }
 
-        /* TOAST */
         #toastContainer {
             position: fixed;
             bottom: 20px;
@@ -488,7 +603,6 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
-        /* LOADING */
         .loading-overlay {
             position: fixed;
             top: 0;
@@ -525,8 +639,11 @@
             to { transform: rotate(360deg); }
         }
 
-        /* RESPONSIVE */
         @media (max-width: 768px) {
+            .money-text {
+                font-size: 3rem;
+            }
+            
             .stats-grid {
                 grid-template-columns: 1fr;
             }
@@ -545,7 +662,6 @@
             }
         }
 
-        /* EMPTY STATES */
         .empty-state {
             text-align: center;
             padding: 3rem 1rem;
@@ -560,399 +676,492 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-container">
-            <div class="logo">
-                <div class="logo-icon">🏛️</div>
-                <div class="logo-text">
-                    <h1>BATHALA Intelligence</h1>
-                    <p class="logo-subtitle">DPWH AI Governance Platform</p>
-                </div>
-            </div>
-            
-            <button class="menu-toggle" id="menuToggle">
-                <i class="fas fa-bars"></i>
-            </button>
+    <!-- MONEY POPUP - FIRST THING VISIBLE -->
+    <div class="money-popup" id="moneyPopup">
+        <!-- Floating money symbols -->
+        <div class="money-floating">₱</div>
+        <div class="money-floating">$</div>
+        <div class="money-floating">€</div>
+        <div class="money-floating">£</div>
+        <div class="money-floating">¥</div>
+        
+        <div class="money-content">
+            <div class="money-icon">💰</div>
+            <h1 class="money-text">SHOW ME THE MONEY!</h1>
+            <p class="money-subtitle">Click anywhere to reveal the BATHALA AI System</p>
+            <p class="money-subtitle" style="font-size: 0.9rem; margin-top: 0.5rem;">
+                (Protecting DPWH funds from corruption since 2024)
+            </p>
         </div>
-    </header>
+    </div>
 
-    <!-- Mobile Navigation -->
-    <nav class="mobile-nav" id="mobileNav">
-        <ul>
-            <li><a href="#dashboard"><i class="fas fa-home"></i> Dashboard</a></li>
-            <li><a href="#contractor-vetting"><i class="fas fa-user-check"></i> Contractor Vetting</a></li>
-            <li><a href="#document-analysis"><i class="fas fa-file-alt"></i> Document Analysis</a></li>
-            <li><a href="#ai-agents"><i class="fas fa-robot"></i> AI Agents</a></li>
-            <li><a href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
-        </ul>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Dashboard -->
-        <section id="dashboard" class="section active">
-            <div class="section-header">
-                <h2><i class="fas fa-home"></i> Dashboard</h2>
-                <p class="section-subtitle">Real-time AI Oversight of DPWH Projects</p>
+    <!-- MAIN CONTENT (HIDDEN INITIALLY) -->
+    <div id="mainApp" style="display: none;">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-container">
+                <div class="logo">
+                    <div class="logo-icon">🏛️</div>
+                    <div class="logo-text">
+                        <h1>BATHALA Intelligence</h1>
+                        <p class="logo-subtitle">DPWH AI Governance Platform</p>
+                    </div>
+                </div>
+                
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
+        </header>
 
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon" style="background: #e3f2fd;">
-                        <i class="fas fa-hard-hat" style="color: #1976d2;"></i>
+        <!-- Mobile Navigation -->
+        <nav class="mobile-nav" id="mobileNav">
+            <ul>
+                <li><a href="#dashboard"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="#contractor-vetting"><i class="fas fa-user-check"></i> Contractor Vetting</a></li>
+                <li><a href="#document-analysis"><i class="fas fa-file-alt"></i> Document Analysis</a></li>
+                <li><a href="#ai-agents"><i class="fas fa-robot"></i> AI Agents</a></li>
+                <li><a href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content" id="mainContent">
+            <!-- Dashboard -->
+            <section id="dashboard" class="section active">
+                <div class="section-header">
+                    <h2><i class="fas fa-home"></i> Dashboard</h2>
+                    <p class="section-subtitle">Real-time AI Oversight of DPWH Projects</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #e3f2fd;">
+                            <i class="fas fa-hard-hat" style="color: #1976d2;"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>1,247</h3>
+                            <p>Active Projects</p>
+                        </div>
                     </div>
-                    <div class="stat-info">
-                        <h3>1,247</h3>
-                        <p>Active Projects</p>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #f3e5f5;">
+                            <i class="fas fa-building" style="color: #7b1fa2;"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>892</h3>
+                            <p>Vetted Contractors</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #e8f5e9;">
+                            <i class="fas fa-shield-alt" style="color: #388e3c;"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>₱ 42.3B</h3>
+                            <p>Protected Funds</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #fff3e0;">
+                            <i class="fas fa-exclamation-triangle" style="color: #f57c00;"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>24</h3>
+                            <p>Red Flags Detected</p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="stat-card">
-                    <div class="stat-icon" style="background: #f3e5f5;">
-                        <i class="fas fa-building" style="color: #7b1fa2;"></i>
+                <div class="dashboard-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Recent Risk Assessments</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="risk-list">
+                                <div class="risk-item">
+                                    <div class="risk-info">
+                                        <h4>Discaya Construction Group</h4>
+                                        <p>9 related companies detected</p>
+                                    </div>
+                                    <span class="risk-badge high">HIGH RISK</span>
+                                </div>
+                                <div class="risk-item">
+                                    <div class="risk-info">
+                                        <h4>Edison Development Corp.</h4>
+                                        <p>Clean record, active license</p>
+                                    </div>
+                                    <span class="risk-badge low">LOW RISK</span>
+                                </div>
+                                <div class="risk-item">
+                                    <div class="risk-info">
+                                        <h4>XYZ Builders Inc.</h4>
+                                        <p>Near-expired PCAB license</p>
+                                    </div>
+                                    <span class="risk-badge medium">MEDIUM RISK</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="stat-info">
-                        <h3>892</h3>
-                        <p>Vetted Contractors</p>
-                    </div>
-                </div>
 
-                <div class="stat-card">
-                    <div class="stat-icon" style="background: #e8f5e9;">
-                        <i class="fas fa-shield-alt" style="color: #388e3c;"></i>
-                    </div>
-                    <div class="stat-info">
-                        <h3>₱ 42.3B</h3>
-                        <p>Protected Funds</p>
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon" style="background: #fff3e0;">
-                        <i class="fas fa-exclamation-triangle" style="color: #f57c00;"></i>
-                    </div>
-                    <div class="stat-info">
-                        <h3>24</h3>
-                        <p>Red Flags Detected</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="dashboard-grid">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Recent Risk Assessments</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="risk-list">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>AI Analysis Queue</h3>
+                        </div>
+                        <div class="card-body">
                             <div class="risk-item">
                                 <div class="risk-info">
-                                    <h4>Discaya Construction Group</h4>
-                                    <p>9 related companies detected</p>
+                                    <h4>Document Analysis</h4>
+                                    <p>SEC Articles of Incorporation</p>
                                 </div>
-                                <span class="risk-badge high">HIGH RISK</span>
+                                <div class="risk-badge" style="background: #e3f2fd; color: #1976d2;">
+                                    Processing
+                                </div>
                             </div>
                             <div class="risk-item">
                                 <div class="risk-info">
-                                    <h4>Edison Development Corp.</h4>
-                                    <p>Clean record, active license</p>
+                                    <h4>Contractor Vetting</h4>
+                                    <p>ABC Construction Co.</p>
                                 </div>
-                                <span class="risk-badge low">LOW RISK</span>
+                                <div class="risk-badge" style="background: #f3e5f5; color: #7b1fa2;">
+                                    Pending
+                                </div>
                             </div>
                             <div class="risk-item">
                                 <div class="risk-info">
-                                    <h4>XYZ Builders Inc.</h4>
-                                    <p>Near-expired PCAB license</p>
+                                    <h4>Bid Analysis</h4>
+                                    <p>Flood Control Project #FC-2025-045</p>
                                 </div>
-                                <span class="risk-badge medium">MEDIUM RISK</span>
+                                <div class="risk-badge" style="background: #e8f5e9; color: #388e3c;">
+                                    Completed
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </section>
 
-                <div class="card">
-                    <div class="card-header">
-                        <h3>AI Analysis Queue</h3>
+            <!-- Contractor Vetting -->
+            <section id="contractor-vetting" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-user-check"></i> Contractor Vetting System</h2>
+                    <p class="section-subtitle">AI-powered background checks and risk assessment</p>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>New Contractor Assessment</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="contractorForm">
+                                <div class="form-group">
+                                    <label for="contractorName">Contractor Name</label>
+                                    <input type="text" id="contractorName" placeholder="Enter contractor name" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="secNumber">SEC Registration Number</label>
+                                    <input type="text" id="secNumber" placeholder="Enter SEC Registration No.">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Data Sources to Check</label>
+                                    <div class="checkbox-group">
+                                        <label class="checkbox">
+                                            <input type="checkbox" name="sources" value="sec" checked>
+                                            <span>SEC Database</span>
+                                        </label>
+                                        <label class="checkbox">
+                                            <input type="checkbox" name="sources" value="pcab" checked>
+                                            <span>PCAB License</span>
+                                        </label>
+                                        <label class="checkbox">
+                                            <input type="checkbox" name="sources" value="philgeps" checked>
+                                            <span>PhilGEPS</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-actions" style="display: flex; gap: 1rem; margin-top: 2rem;">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-search"></i> Start Vetting
+                                    </button>
+                                    <button type="button" class="btn btn-secondary" id="uploadDocsBtn">
+                                        <i class="fas fa-upload"></i> Upload Docs
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <div class="risk-item">
-                            <div class="risk-info">
-                                <h4>Document Analysis</h4>
-                                <p>SEC Articles of Incorporation</p>
-                            </div>
-                            <div class="risk-badge" style="background: #e3f2fd; color: #1976d2;">
-                                Processing
-                            </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Vetting Results</h3>
                         </div>
-                        <div class="risk-item">
-                            <div class="risk-info">
-                                <h4>Contractor Vetting</h4>
-                                <p>ABC Construction Co.</p>
-                            </div>
-                            <div class="risk-badge" style="background: #f3e5f5; color: #7b1fa2;">
-                                Pending
-                            </div>
-                        </div>
-                        <div class="risk-item">
-                            <div class="risk-info">
-                                <h4>Bid Analysis</h4>
-                                <p>Flood Control Project #FC-2025-045</p>
-                            </div>
-                            <div class="risk-badge" style="background: #e8f5e9; color: #388e3c;">
-                                Completed
+                        <div class="card-body">
+                            <div id="vettingResults">
+                                <div class="empty-state">
+                                    <i class="fas fa-search"></i>
+                                    <h4>No Vetting Results Yet</h4>
+                                    <p>Enter contractor information and start the vetting process</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Contractor Vetting -->
-        <section id="contractor-vetting" class="section">
-            <div class="section-header">
-                <h2><i class="fas fa-user-check"></i> Contractor Vetting System</h2>
-                <p class="section-subtitle">AI-powered background checks and risk assessment</p>
-            </div>
+            <!-- Document Analysis -->
+            <section id="document-analysis" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-file-alt"></i> Document Analysis</h2>
+                    <p class="section-subtitle">AI-powered document processing and verification</p>
+                </div>
 
-            <div class="dashboard-grid">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>New Contractor Assessment</h3>
-                    </div>
-                    <div class="card-body">
-                        <form id="contractorForm">
-                            <div class="form-group">
-                                <label for="contractorName">Contractor Name</label>
-                                <input type="text" id="contractorName" placeholder="Enter contractor name" required>
+                <div class="dashboard-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Upload Documents</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="upload-area" id="uploadArea" onclick="document.getElementById('documentUpload').click()">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <h4>Click to upload files</h4>
+                                <p>PDF, DOCX, JPG, PNG (Max: 10MB each)</p>
+                                <input type="file" id="documentUpload" multiple accept=".pdf,.docx,.jpg,.jpeg,.png">
                             </div>
 
-                            <div class="form-group">
-                                <label for="secNumber">SEC Registration Number</label>
-                                <input type="text" id="secNumber" placeholder="Enter SEC Registration No.">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Data Sources to Check</label>
+                            <div style="margin: 2rem 0;">
+                                <h4 style="margin-bottom: 1rem;">AI Analysis Options</h4>
                                 <div class="checkbox-group">
                                     <label class="checkbox">
-                                        <input type="checkbox" name="sources" value="sec" checked>
-                                        <span>SEC Database</span>
+                                        <input type="checkbox" id="extractText" checked>
+                                        <span>Extract Text & Data</span>
                                     </label>
                                     <label class="checkbox">
-                                        <input type="checkbox" name="sources" value="pcab" checked>
-                                        <span>PCAB License</span>
+                                        <input type="checkbox" id="verifyAuthenticity" checked>
+                                        <span>Verify Authenticity</span>
                                     </label>
                                     <label class="checkbox">
-                                        <input type="checkbox" name="sources" value="philgeps" checked>
-                                        <span>PhilGEPS</span>
+                                        <input type="checkbox" id="checkAnomalies" checked>
+                                        <span>Check for Anomalies</span>
                                     </label>
                                 </div>
                             </div>
 
-                            <div class="form-actions" style="display: flex; gap: 1rem; margin-top: 2rem;">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-search"></i> Start Vetting
-                                </button>
-                                <button type="button" class="btn btn-secondary" id="uploadDocsBtn">
-                                    <i class="fas fa-upload"></i> Upload Docs
-                                </button>
-                            </div>
-                        </form>
+                            <button class="btn btn-primary" id="analyzeDocsBtn" style="width: 100%;">
+                                <i class="fas fa-robot"></i> Start AI Analysis
+                            </button>
+                        </div>
                     </div>
-                </div>
 
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Vetting Results</h3>
-                    </div>
-                    <div class="card-body">
-                        <div id="vettingResults">
-                            <div class="empty-state">
-                                <i class="fas fa-search"></i>
-                                <h4>No Vetting Results Yet</h4>
-                                <p>Enter contractor information and start the vetting process</p>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Analysis Results</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="analysisResults">
+                                <div class="empty-state">
+                                    <i class="fas fa-file-search"></i>
+                                    <h4>No Documents Analyzed</h4>
+                                    <p>Upload documents and start AI analysis</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Document Analysis -->
-        <section id="document-analysis" class="section">
-            <div class="section-header">
-                <h2><i class="fas fa-file-alt"></i> Document Analysis</h2>
-                <p class="section-subtitle">AI-powered document processing and verification</p>
-            </div>
-
-            <div class="dashboard-grid">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Upload Documents</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="upload-area" id="uploadArea" onclick="document.getElementById('documentUpload').click()">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            <h4>Click to upload files</h4>
-                            <p>PDF, DOCX, JPG, PNG (Max: 10MB each)</p>
-                            <input type="file" id="documentUpload" multiple accept=".pdf,.docx,.jpg,.jpeg,.png">
-                        </div>
-
-                        <div style="margin: 2rem 0;">
-                            <h4 style="margin-bottom: 1rem;">AI Analysis Options</h4>
-                            <div class="checkbox-group">
-                                <label class="checkbox">
-                                    <input type="checkbox" id="extractText" checked>
-                                    <span>Extract Text & Data</span>
-                                </label>
-                                <label class="checkbox">
-                                    <input type="checkbox" id="verifyAuthenticity" checked>
-                                    <span>Verify Authenticity</span>
-                                </label>
-                                <label class="checkbox">
-                                    <input type="checkbox" id="checkAnomalies" checked>
-                                    <span>Check for Anomalies</span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <button class="btn btn-primary" id="analyzeDocsBtn" style="width: 100%;">
-                            <i class="fas fa-robot"></i> Start AI Analysis
-                        </button>
-                    </div>
+            <!-- AI Agents -->
+            <section id="ai-agents" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-robot"></i> AI Agents</h2>
+                    <p class="section-subtitle">Specialized AI systems for different oversight tasks</p>
                 </div>
 
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Analysis Results</h3>
-                    </div>
-                    <div class="card-body">
-                        <div id="analysisResults">
-                            <div class="empty-state">
-                                <i class="fas fa-file-search"></i>
-                                <h4>No Documents Analyzed</h4>
-                                <p>Upload documents and start AI analysis</p>
+                <div class="agents-grid">
+                    <div class="agent-card">
+                        <div class="agent-header">
+                            <div class="agent-icon" style="background: #e3f2fd;">
+                                <i class="fas fa-brain" style="color: #1976d2;"></i>
                             </div>
+                            <h3>Agent 1</h3>
+                            <span class="agent-status">Active</span>
+                        </div>
+                        <div class="agent-body">
+                            <p><strong>Specialization:</strong> Deep Analysis & Pattern Recognition</p>
+                            <p style="margin-top: 0.5rem;"><strong>Capabilities:</strong></p>
+                            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                                <li>Complex document analysis</li>
+                                <li>Family network detection</li>
+                                <li>Historical pattern analysis</li>
+                                <li>Risk prediction modeling</li>
+                            </ul>
+                            <div style="display: flex; gap: 2rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e0e0e0;">
+                                <div style="text-align: center;">
+                                    <div style="font-size: 1.5rem; font-weight: 700; color: #1976d2;">98.7%</div>
+                                    <div style="font-size: 0.75rem; color: #5c6bc0;">Accuracy</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div style="font-size: 1.5rem; font-weight: 700; color: #1976d2;">1,247</div>
+                                    <div style="font-size: 0.75rem; color: #5c6bc0;">Analyses</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="agent-footer">
+                            <button class="btn btn-primary agent-action" data-agent="agent1" style="width: 100%;">
+                                <i class="fas fa-play"></i> Run Analysis
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="agent-card">
+                        <div class="agent-header">
+                            <div class="agent-icon" style="background: #f3e5f5;">
+                                <i class="fas fa-bolt" style="color: #7b1fa2;"></i>
+                            </div>
+                            <h3>Agent 2</h3>
+                            <span class="agent-status">Active</span>
+                        </div>
+                        <div class="agent-body">
+                            <p><strong>Specialization:</strong> Fast Verification & Real-time Monitoring</p>
+                            <p style="margin-top: 0.5rem;"><strong>Capabilities:</strong></p>
+                            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                                <li>Real-time data verification</li>
+                                <li>Quick red flag detection</li>
+                                <li>Live project monitoring</li>
+                                <li>Instant anomaly alerts</li>
+                            </ul>
+                            <div style="display: flex; gap: 2rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e0e0e0;">
+                                <div style="text-align: center;">
+                                    <div style="font-size: 1.5rem; font-weight: 700; color: #7b1fa2;">95.2%</div>
+                                    <div style="font-size: 0.75rem; color: #5c6bc0;">Accuracy</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div style="font-size: 1.5rem; font-weight: 700; color: #7b1fa2;">892</div>
+                                    <div style="font-size: 0.75rem; color: #5c6bc0;">Verifications</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="agent-footer">
+                            <button class="btn btn-primary agent-action" data-agent="agent2" style="width: 100%;">
+                                <i class="fas fa-play"></i> Run Verification
+                            </button>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </main>
 
-        <!-- AI Agents -->
-        <section id="ai-agents" class="section">
-            <div class="section-header">
-                <h2><i class="fas fa-robot"></i> AI Agents</h2>
-                <p class="section-subtitle">Specialized AI systems for different oversight tasks</p>
-            </div>
-
-            <div class="agents-grid">
-                <div class="agent-card">
-                    <div class="agent-header">
-                        <div class="agent-icon" style="background: #e3f2fd;">
-                            <i class="fas fa-brain" style="color: #1976d2;"></i>
-                        </div>
-                        <h3>Agent 1</h3>
-                        <span class="agent-status">Active</span>
-                    </div>
-                    <div class="agent-body">
-                        <p><strong>Specialization:</strong> Deep Analysis & Pattern Recognition</p>
-                        <p style="margin-top: 0.5rem;"><strong>Capabilities:</strong></p>
-                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-                            <li>Complex document analysis</li>
-                            <li>Family network detection</li>
-                            <li>Historical pattern analysis</li>
-                            <li>Risk prediction modeling</li>
-                        </ul>
-                        <div style="display: flex; gap: 2rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e0e0e0;">
-                            <div style="text-align: center;">
-                                <div style="font-size: 1.5rem; font-weight: 700; color: #1976d2;">98.7%</div>
-                                <div style="font-size: 0.75rem; color: #5c6bc0;">Accuracy</div>
-                            </div>
-                            <div style="text-align: center;">
-                                <div style="font-size: 1.5rem; font-weight: 700; color: #1976d2;">1,247</div>
-                                <div style="font-size: 0.75rem; color: #5c6bc0;">Analyses</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="agent-footer">
-                        <button class="btn btn-primary agent-action" data-agent="agent1" style="width: 100%;">
-                            <i class="fas fa-play"></i> Run Analysis
-                        </button>
-                    </div>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>BATHALA Intelligence</h3>
+                    <p>DPWH AI Governance Platform</p>
                 </div>
-
-                <div class="agent-card">
-                    <div class="agent-header">
-                        <div class="agent-icon" style="background: #f3e5f5;">
-                            <i class="fas fa-bolt" style="color: #7b1fa2;"></i>
-                        </div>
-                        <h3>Agent 2</h3>
-                        <span class="agent-status">Active</span>
-                    </div>
-                    <div class="agent-body">
-                        <p><strong>Specialization:</strong> Fast Verification & Real-time Monitoring</p>
-                        <p style="margin-top: 0.5rem;"><strong>Capabilities:</strong></p>
-                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-                            <li>Real-time data verification</li>
-                            <li>Quick red flag detection</li>
-                            <li>Live project monitoring</li>
-                            <li>Instant anomaly alerts</li>
-                        </ul>
-                        <div style="display: flex; gap: 2rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e0e0e0;">
-                            <div style="text-align: center;">
-                                <div style="font-size: 1.5rem; font-weight: 700; color: #7b1fa2;">95.2%</div>
-                                <div style="font-size: 0.75rem; color: #5c6bc0;">Accuracy</div>
-                            </div>
-                            <div style="text-align: center;">
-                                <div style="font-size: 1.5rem; font-weight: 700; color: #7b1fa2;">892</div>
-                                <div style="font-size: 0.75rem; color: #5c6bc0;">Verifications</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="agent-footer">
-                        <button class="btn btn-primary agent-action" data-agent="agent2" style="width: 100%;">
-                            <i class="fas fa-play"></i> Run Verification
-                        </button>
-                    </div>
+                <div class="footer-info">
+                    <p><i class="fas fa-shield-alt"></i> Protecting Public Funds Through AI</p>
+                    <p><i class="fas fa-phone"></i> DPWH Hotline: (02) 304-3000</p>
+                    <p><i class="fas fa-envelope"></i> ai-governance@dpwh.gov.ph</p>
                 </div>
             </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-logo">
-                <h3>BATHALA Intelligence</h3>
-                <p>DPWH AI Governance Platform</p>
+            <div class="footer-bottom">
+                <p>© 2024 Department of Public Works and Highways. All rights reserved.</p>
             </div>
-            <div class="footer-info">
-                <p><i class="fas fa-shield-alt"></i> Protecting Public Funds Through AI</p>
-                <p><i class="fas fa-phone"></i> DPWH Hotline: (02) 304-3000</p>
-                <p><i class="fas fa-envelope"></i> ai-governance@dpwh.gov.ph</p>
+        </footer>
+
+        <!-- Toast Container -->
+        <div id="toastContainer"></div>
+
+        <!-- Loading Overlay -->
+        <div id="loadingOverlay" class="loading-overlay">
+            <div class="loading-content">
+                <div class="spinner"></div>
+                <p>Processing with AI...</p>
             </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2024 Department of Public Works and Highways. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- Toast Container -->
-    <div id="toastContainer"></div>
-
-    <!-- Loading Overlay -->
-    <div id="loadingOverlay" class="loading-overlay">
-        <div class="loading-content">
-            <div class="spinner"></div>
-            <p>Processing with AI...</p>
         </div>
     </div>
 
     <script>
-        // Initialize App
+        // Handle the money popup
         document.addEventListener('DOMContentLoaded', function() {
+            const moneyPopup = document.getElementById('moneyPopup');
+            const mainApp = document.getElementById('mainApp');
+            const mainContent = document.getElementById('mainContent');
+            
+            // Play a sound effect on click (optional)
+            function playMoneySound() {
+                try {
+                    // Create a simple money sound using Web Audio API
+                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    
+                    oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime); // C5
+                    oscillator.frequency.exponentialRampToValueAtTime(1046.50, audioContext.currentTime + 0.3); // C6
+                    
+                    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                    
+                    oscillator.start();
+                    oscillator.stop(audioContext.currentTime + 0.5);
+                } catch (e) {
+                    console.log("Audio not supported or blocked");
+                }
+            }
+            
+            // Click handler for money popup
+            function revealApp() {
+                playMoneySound();
+                
+                // Animate popup exit
+                moneyPopup.style.animation = 'moneyReveal 0.5s ease-in reverse';
+                moneyPopup.style.opacity = '0';
+                
+                setTimeout(() => {
+                    // Hide popup
+                    moneyPopup.style.display = 'none';
+                    
+                    // Show main app with animation
+                    mainApp.style.display = 'block';
+                    setTimeout(() => {
+                        mainContent.classList.add('show');
+                    }, 50);
+                    
+                    // Initialize the app
+                    initializeApp();
+                }, 500);
+            }
+            
+            // Add click event to popup
+            moneyPopup.addEventListener('click', revealApp);
+            
+            // Also respond to any key press
+            document.addEventListener('keydown', function(e) {
+                if (moneyPopup.style.display !== 'none') {
+                    revealApp();
+                }
+            });
+            
+            // Auto-reveal after 10 seconds (optional safety feature)
+            setTimeout(() => {
+                if (moneyPopup.style.display !== 'none') {
+                    revealApp();
+                }
+            }, 10000);
+        });
+        
+        // Initialize the main app
+        function initializeApp() {
             console.log('BATHALA Intelligence Platform loaded');
             
             // Mobile Menu Toggle
@@ -1008,7 +1217,7 @@
             
             // Initialize with dashboard
             showSection('dashboard');
-        });
+        }
         
         // Show Section
         function showSection(sectionId) {
