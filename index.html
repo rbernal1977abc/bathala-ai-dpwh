@@ -1,1 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BATHALA Intelligence - DPWH AI Governance</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏛️</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">🏛️</div>
+                <div class="logo-text">
+                    <h1>BATHALA Intelligence</h1>
+                    <p class="logo-subtitle">DPWH AI Governance Platform</p>
+                </div>
+            </div>
+            
+            <div class="header-controls">
+                <div class="user-info">
+                    <span class="user-name">DPWH User</span>
+                    <div class="user-avatar">DW</div>
+                </div>
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
 
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobileNav">
+        <ul>
+            <li><a href="#dashboard"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="#contractor-vetting"><i class="fas fa-user-check"></i> Contractor Vetting</a></li>
+            <li><a href="#document-analysis"><i class="fas fa-file-alt"></i> Document Analysis</a></li>
+            <li><a href="#project-monitoring"><i class="fas fa-hard-hat"></i> Project Monitoring</a></li>
+            <li><a href="#ai-agents"><i class="fas fa-robot"></i> AI Agents</a></li>
+            <li><a href="#reports"><i class="fas fa-chart-bar"></i> Reports</a></li>
+            <li><a href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Dashboard -->
+        <section id="dashboard" class="section active">
+            <div class="section-header">
+                <h2><i class="fas fa-home"></i> Dashboard</h2>
+                <p class="section-subtitle">Real-time AI Oversight of DPWH Projects</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #e3f2fd;">
+                        <i class="fas fa-hard-hat" style="color: #1976d2;"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>1,247</h3>
+                        <p>Active Projects</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #f3e5f5;">
+                        <i class="fas fa-building" style="color: #7b1fa2;"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>892</h3>
+                        <p>Vetted Contractors</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #e8f5e9;">
+                        <i class="fas fa-shield-alt" style="color: #388e3c;"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>₱ 42.3B</h3>
+                        <p>Protected Funds</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #fff3e0;">
+                        <i class="fas fa-exclamation-triangle" style="color: #f57c00;"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>24</h3>
+                        <p>Red Flags Detected</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Recent Risk Assessments</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="risk-list">
+                            <div class="risk-item">
+                                <div class="risk-info">
+                                    <h4>Discaya Construction Group</h4>
+                                    <p>9 related companies detected</p>
+                                </div>
+                                <span class="risk-badge high">HIGH RISK</span>
+                            </div>
+                            <div class="risk-item">
+                                <div class="risk-info">
+                                    <h4>Edison Development Corp.</h4>
+                                    <p>Clean record, active license</p>
+                                </div>
+                                <span class="risk-badge low">LOW RISK</span>
+                            </div>
+                            <div class="risk-item">
+                                <div class="risk-info">
+                                    <h4>XYZ Builders Inc.</h4>
+                                    <p>Near-expired PCAB license</p>
+                                </div>
+                                <span class="risk-badge medium">MEDIUM RISK</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>AI Analysis Queue</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="queue-item">
+                            <div class="queue-info">
+                                <h4>Document Analysis</h4>
+                                <p>SEC Articles of Incorporation</p>
+                            </div>
+                            <div class="queue-status">
+                                <span class="status-badge processing">Processing</span>
+                            </div>
+                        </div>
+                        <div class="queue-item">
+                            <div class="queue-info">
+                                <h4>Contractor Vetting</h4>
+                                <p>ABC Construction Co.</p>
+                            </div>
+                            <div class="queue-status">
+                                <span class="status-badge pending">Pending</span>
+                            </div>
+                        </div>
+                        <div class="queue-item">
+                            <div class="queue-info">
+                                <h4>Bid Analysis</h4>
+                                <p>Flood Control Project #FC-2025-045</p>
+                            </div>
+                            <div class="queue-status">
+                                <span class="status-badge completed">Completed</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contractor Vetting -->
+        <section id="contractor-vetting" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-user-check"></i> Contractor Vetting System</h2>
+                <p class="section-subtitle">AI-powered background checks and risk assessment</p>
+            </div>
+
+            <div class="vetting-container">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>New Contractor Assessment</h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="contractorForm">
+                            <div class="form-group">
+                                <label for="contractorName">Contractor Name</label>
+                                <input type="text" id="contractorName" placeholder="Enter contractor name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="secNumber">SEC Registration Number</label>
+                                <input type="text" id="secNumber" placeholder="Enter SEC Registration No.">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="pcabLicense">PCAB License Number</label>
+                                <input type="text" id="pcabLicense" placeholder="Enter PCAB License No.">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Data Sources to Check</label>
+                                <div class="checkbox-group">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="sources" value="sec" checked>
+                                        <span>SEC Database</span>
+                                    </label>
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="sources" value="pcab" checked>
+                                        <span>PCAB License</span>
+                                    </label>
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="sources" value="philgeps" checked>
+                                        <span>PhilGEPS</span>
+                                    </label>
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="sources" value="gppb" checked>
+                                        <span>GPPB Blacklist</span>
+                                    </label>
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="sources" value="coa" checked>
+                                        <span>COA Reports</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-search"></i> Start Vetting Process
+                                </button>
+                                <button type="button" class="btn btn-secondary" id="uploadDocsBtn">
+                                    <i class="fas fa-upload"></i> Upload Documents
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Vetting Results</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="vettingResults">
+                            <div class="empty-state">
+                                <i class="fas fa-search"></i>
+                                <h4>No Vetting Results Yet</h4>
+                                <p>Enter contractor information and start the vetting process</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Document Analysis -->
+        <section id="document-analysis" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-file-alt"></i> Document Analysis</h2>
+                <p class="section-subtitle">AI-powered document processing and verification</p>
+            </div>
+
+            <div class="document-container">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Upload Documents</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="upload-area" id="uploadArea">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <h4>Drop files here or click to upload</h4>
+                            <p>Supports PDF, DOCX, JPG, PNG (Max: 10MB each)</p>
+                            <input type="file" id="documentUpload" multiple accept=".pdf,.docx,.jpg,.jpeg,.png">
+                        </div>
+
+                        <div class="document-types">
+                            <h4>Common DPWH Documents</h4>
+                            <div class="doc-buttons">
+                                <button class="doc-btn" data-type="sec">
+                                    <i class="fas fa-file-contract"></i> SEC Documents
+                                </button>
+                                <button class="doc-btn" data-type="pcab">
+                                    <i class="fas fa-id-card"></i> PCAB License
+                                </button>
+                                <button class="doc-btn" data-type="financial">
+                                    <i class="fas fa-chart-line"></i> Financial Statements
+                                </button>
+                                <button class="doc-btn" data-type="bid">
+                                    <i class="fas fa-gavel"></i> Bid Documents
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="ai-analysis-options">
+                            <h4>AI Analysis Options</h4>
+                            <div class="ai-options">
+                                <label class="checkbox">
+                                    <input type="checkbox" id="extractText" checked>
+                                    <span>Extract Text & Data</span>
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" id="verifyAuthenticity" checked>
+                                    <span>Verify Authenticity</span>
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" id="checkAnomalies" checked>
+                                    <span>Check for Anomalies</span>
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" id="compareDatabase">
+                                    <span>Compare with Database</span>
+                                </label>
+                            </div>
+
+                            <div class="agent-selection">
+                                <label>Select AI Agent:</label>
+                                <select id="aiAgent">
+                                    <option value="agent1">Agent 1 (Deep Analysis)</option>
+                                    <option value="agent2">Agent 2 (Fast Verification)</option>
+                                    <option value="both">Both Agents</option>
+                                </select>
+                            </div>
+
+                            <button class="btn btn-primary" id="analyzeDocsBtn">
+                                <i class="fas fa-robot"></i> Start AI Analysis
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Analysis Results</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="analysisResults">
+                            <div class="empty-state">
+                                <i class="fas fa-file-search"></i>
+                                <h4>No Documents Analyzed</h4>
+                                <p>Upload documents and start AI analysis</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Agents -->
+        <section id="ai-agents" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-robot"></i> AI Agents</h2>
+                <p class="section-subtitle">Specialized AI systems for different oversight tasks</p>
+            </div>
+
+            <div class="agents-grid">
+                <div class="agent-card">
+                    <div class="agent-header">
+                        <div class="agent-icon" style="background: #e3f2fd;">
+                            <i class="fas fa-brain" style="color: #1976d2;"></i>
+                        </div>
+                        <h3>Agent 1</h3>
+                        <span class="agent-status active">Active</span>
+                    </div>
+                    <div class="agent-body">
+                        <p><strong>Specialization:</strong> Deep Analysis & Pattern Recognition</p>
+                        <p><strong>Capabilities:</strong></p>
+                        <ul>
+                            <li>Complex document analysis</li>
+                            <li>Family network detection</li>
+                            <li>Historical pattern analysis</li>
+                            <li>Risk prediction modeling</li>
+                        </ul>
+                        <div class="agent-stats">
+                            <div class="stat">
+                                <span class="stat-value">98.7%</span>
+                                <span class="stat-label">Accuracy</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">1,247</span>
+                                <span class="stat-label">Analyses</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="agent-footer">
+                        <button class="btn btn-primary agent-action" data-agent="agent1">
+                            <i class="fas fa-play"></i> Run Analysis
+                        </button>
+                    </div>
+                </div>
+
+                <div class="agent-card">
+                    <div class="agent-header">
+                        <div class="agent-icon" style="background: #f3e5f5;">
+                            <i class="fas fa-bolt" style="color: #7b1fa2;"></i>
+                        </div>
+                        <h3>Agent 2</h3>
+                        <span class="agent-status active">Active</span>
+                    </div>
+                    <div class="agent-body">
+                        <p><strong>Specialization:</strong> Fast Verification & Real-time Monitoring</p>
+                        <p><strong>Capabilities:</strong></p>
+                        <ul>
+                            <li>Real-time data verification</li>
+                            <li>Quick red flag detection</li>
+                            <li>Live project monitoring</li>
+                            <li>Instant anomaly alerts</li>
+                        </ul>
+                        <div class="agent-stats">
+                            <div class="stat">
+                                <span class="stat-value">95.2%</span>
+                                <span class="stat-label">Accuracy</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">892</span>
+                                <span class="stat-label">Verifications</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="agent-footer">
+                        <button class="btn btn-primary agent-action" data-agent="agent2">
+                            <i class="fas fa-play"></i> Run Verification
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>AI Agent Console</h3>
+                </div>
+                <div class="card-body">
+                    <div class="console-container">
+                        <div class="console-output" id="agentConsole">
+                            <div class="console-message agent1">
+                                <span class="console-time">[12:45:23]</span>
+                                <span class="console-agent">Agent 1:</span>
+                                <span>System initialized. Ready for deep analysis tasks.</span>
+                            </div>
+                            <div class="console-message agent2">
+                                <span class="console-time">[12:45:25]</span>
+                                <span class="console-agent">Agent 2:</span>
+                                <span>Real-time monitoring active. All systems nominal.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="console-input">
+                            <input type="text" id="agentCommand" placeholder="Enter command for AI agents...">
+                            <button id="sendCommand" class="btn btn-primary">
+                                <i class="fas fa-paper-plane"></i> Send
+                            </button>
+                        </div>
+
+                        <div class="console-actions">
+                            <button class="btn btn-secondary" id="clearConsole">
+                                <i class="fas fa-trash"></i> Clear Console
+                            </button>
+                            <button class="btn btn-secondary" id="testAgents">
+                                <i class="fas fa-vial"></i> Test Both Agents
+                            </button>
+                            <button class="btn btn-secondary" id="exportLogs">
+                                <i class="fas fa-download"></i> Export Logs
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h3>BATHALA Intelligence</h3>
+                <p>DPWH AI Governance Platform</p>
+            </div>
+            <div class="footer-info">
+                <p><i class="fas fa-shield-alt"></i> Protecting Public Funds Through AI</p>
+                <p><i class="fas fa-phone"></i> DPWH Hotline: (02) 304-3000</p>
+                <p><i class="fas fa-envelope"></i> ai-governance@dpwh.gov.ph</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Department of Public Works and Highways. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer"></div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p>Processing with AI...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
