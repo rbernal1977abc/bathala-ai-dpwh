@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "name": "bathala-ai-dpwh",
+  "public": true,
+  "builds": [
+    {
+      "src": "api/server.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "*.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "ALLOWED_ORIGINS": "https://dpwh.gov.ph,https://*.dpwh.gov.ph",
+    "UPLOAD_LIMIT": "10485760"
+  }
+}
