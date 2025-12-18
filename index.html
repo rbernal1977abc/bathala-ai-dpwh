@@ -4,17 +4,560 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BATHALA Intelligence - DPWH AI Governance</title>
-    <!-- CSS Link - MUST be correct -->
-    <link rel="stylesheet" href="style.css">
-    
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏛️</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* RESET AND BASE STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: #1a237e;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, #1a237e, #534bae);
+            color: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-text h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .logo-subtitle {
+            font-size: 0.75rem;
+            opacity: 0.9;
+            margin-top: 2px;
+        }
+
+        .menu-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+            font-size: 1.25rem;
+            cursor: pointer;
+        }
+
+        /* MOBILE NAV */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100vh;
+            background: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            transition: left 0.3s ease;
+            padding-top: 5rem;
+        }
+
+        .mobile-nav.active {
+            left: 0;
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+        }
+
+        .mobile-nav li a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            color: #1a237e;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .mobile-nav li a:hover {
+            background: #f5f5f5;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.75rem;
+            color: #1a237e;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: #5c6bc0;
+            font-size: 0.9rem;
+        }
+
+        /* STATS GRID */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .stat-info h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1a237e;
+        }
+
+        .stat-info p {
+            color: #5c6bc0;
+            font-size: 0.9rem;
+        }
+
+        /* CARDS */
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid #e0e0e0;
+            background: #f8f9fa;
+        }
+
+        .card-header h3 {
+            font-size: 1.25rem;
+            color: #1a237e;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        /* DASHBOARD GRID */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* RISK ITEMS */
+        .risk-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .risk-item:last-child {
+            border-bottom: none;
+        }
+
+        .risk-info h4 {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .risk-info p {
+            color: #5c6bc0;
+            font-size: 0.875rem;
+        }
+
+        .risk-badge {
+            padding: 0.375rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .risk-badge.high {
+            background: #ffebee;
+            color: #d32f2f;
+        }
+
+        .risk-badge.medium {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .risk-badge.low {
+            background: #e8f5e9;
+            color: #388e3c;
+        }
+
+        /* FORMS */
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #1a237e;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox input {
+            width: auto;
+        }
+
+        /* BUTTONS */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1a237e, #534bae);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #534bae, #1a237e);
+        }
+
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #1a237e;
+        }
+
+        .btn-secondary:hover {
+            background: #d5d5d5;
+        }
+
+        /* UPLOAD AREA */
+        .upload-area {
+            border: 2px dashed #e0e0e0;
+            border-radius: 12px;
+            padding: 3rem 1rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            cursor: pointer;
+        }
+
+        .upload-area:hover {
+            border-color: #1a237e;
+        }
+
+        .upload-area i {
+            font-size: 3rem;
+            color: #1a237e;
+            margin-bottom: 1rem;
+        }
+
+        #documentUpload {
+            display: none;
+        }
+
+        /* AI AGENTS */
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .agent-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .agent-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .agent-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .agent-header h3 {
+            flex: 1;
+        }
+
+        .agent-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: #e8f5e9;
+            color: #388e3c;
+        }
+
+        .agent-body {
+            padding: 1.5rem;
+        }
+
+        .agent-footer {
+            padding: 1.5rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: linear-gradient(135deg, #000051, #1a237e);
+            color: white;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+
+        /* TOAST */
+        #toastContainer {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1002;
+        }
+
+        .toast {
+            background: white;
+            color: #1a237e;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* LOADING */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1003;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loading-content {
+            text-align: center;
+            color: white;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .agents-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+
+        /* EMPTY STATES */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #5c6bc0;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #e0e0e0;
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -28,15 +571,9 @@
                 </div>
             </div>
             
-            <div class="header-controls">
-                <div class="user-info">
-                    <span class="user-name">DPWH User</span>
-                    <div class="user-avatar">DW</div>
-                </div>
-                <button class="menu-toggle" id="menuToggle">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
 
@@ -46,9 +583,7 @@
             <li><a href="#dashboard"><i class="fas fa-home"></i> Dashboard</a></li>
             <li><a href="#contractor-vetting"><i class="fas fa-user-check"></i> Contractor Vetting</a></li>
             <li><a href="#document-analysis"><i class="fas fa-file-alt"></i> Document Analysis</a></li>
-            <li><a href="#project-monitoring"><i class="fas fa-hard-hat"></i> Project Monitoring</a></li>
             <li><a href="#ai-agents"><i class="fas fa-robot"></i> AI Agents</a></li>
-            <li><a href="#reports"><i class="fas fa-chart-bar"></i> Reports</a></li>
             <li><a href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
         </ul>
     </nav>
@@ -141,31 +676,31 @@
                         <h3>AI Analysis Queue</h3>
                     </div>
                     <div class="card-body">
-                        <div class="queue-item">
-                            <div class="queue-info">
+                        <div class="risk-item">
+                            <div class="risk-info">
                                 <h4>Document Analysis</h4>
                                 <p>SEC Articles of Incorporation</p>
                             </div>
-                            <div class="queue-status">
-                                <span class="status-badge processing">Processing</span>
+                            <div class="risk-badge" style="background: #e3f2fd; color: #1976d2;">
+                                Processing
                             </div>
                         </div>
-                        <div class="queue-item">
-                            <div class="queue-info">
+                        <div class="risk-item">
+                            <div class="risk-info">
                                 <h4>Contractor Vetting</h4>
                                 <p>ABC Construction Co.</p>
                             </div>
-                            <div class="queue-status">
-                                <span class="status-badge pending">Pending</span>
+                            <div class="risk-badge" style="background: #f3e5f5; color: #7b1fa2;">
+                                Pending
                             </div>
                         </div>
-                        <div class="queue-item">
-                            <div class="queue-info">
+                        <div class="risk-item">
+                            <div class="risk-info">
                                 <h4>Bid Analysis</h4>
                                 <p>Flood Control Project #FC-2025-045</p>
                             </div>
-                            <div class="queue-status">
-                                <span class="status-badge completed">Completed</span>
+                            <div class="risk-badge" style="background: #e8f5e9; color: #388e3c;">
+                                Completed
                             </div>
                         </div>
                     </div>
@@ -180,7 +715,7 @@
                 <p class="section-subtitle">AI-powered background checks and risk assessment</p>
             </div>
 
-            <div class="vetting-container">
+            <div class="dashboard-grid">
                 <div class="card">
                     <div class="card-header">
                         <h3>New Contractor Assessment</h3>
@@ -198,11 +733,6 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="pcabLicense">PCAB License Number</label>
-                                <input type="text" id="pcabLicense" placeholder="Enter PCAB License No.">
-                            </div>
-
-                            <div class="form-group">
                                 <label>Data Sources to Check</label>
                                 <div class="checkbox-group">
                                     <label class="checkbox">
@@ -217,23 +747,15 @@
                                         <input type="checkbox" name="sources" value="philgeps" checked>
                                         <span>PhilGEPS</span>
                                     </label>
-                                    <label class="checkbox">
-                                        <input type="checkbox" name="sources" value="gppb" checked>
-                                        <span>GPPB Blacklist</span>
-                                    </label>
-                                    <label class="checkbox">
-                                        <input type="checkbox" name="sources" value="coa" checked>
-                                        <span>COA Reports</span>
-                                    </label>
                                 </div>
                             </div>
 
-                            <div class="form-actions">
+                            <div class="form-actions" style="display: flex; gap: 1rem; margin-top: 2rem;">
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-search"></i> Start Vetting Process
+                                    <i class="fas fa-search"></i> Start Vetting
                                 </button>
                                 <button type="button" class="btn btn-secondary" id="uploadDocsBtn">
-                                    <i class="fas fa-upload"></i> Upload Documents
+                                    <i class="fas fa-upload"></i> Upload Docs
                                 </button>
                             </div>
                         </form>
@@ -264,40 +786,22 @@
                 <p class="section-subtitle">AI-powered document processing and verification</p>
             </div>
 
-            <div class="document-container">
+            <div class="dashboard-grid">
                 <div class="card">
                     <div class="card-header">
                         <h3>Upload Documents</h3>
                     </div>
                     <div class="card-body">
-                        <div class="upload-area" id="uploadArea">
+                        <div class="upload-area" id="uploadArea" onclick="document.getElementById('documentUpload').click()">
                             <i class="fas fa-cloud-upload-alt"></i>
-                            <h4>Drop files here or click to upload</h4>
-                            <p>Supports PDF, DOCX, JPG, PNG (Max: 10MB each)</p>
+                            <h4>Click to upload files</h4>
+                            <p>PDF, DOCX, JPG, PNG (Max: 10MB each)</p>
                             <input type="file" id="documentUpload" multiple accept=".pdf,.docx,.jpg,.jpeg,.png">
                         </div>
 
-                        <div class="document-types">
-                            <h4>Common DPWH Documents</h4>
-                            <div class="doc-buttons">
-                                <button class="doc-btn" data-type="sec">
-                                    <i class="fas fa-file-contract"></i> SEC Documents
-                                </button>
-                                <button class="doc-btn" data-type="pcab">
-                                    <i class="fas fa-id-card"></i> PCAB License
-                                </button>
-                                <button class="doc-btn" data-type="financial">
-                                    <i class="fas fa-chart-line"></i> Financial Statements
-                                </button>
-                                <button class="doc-btn" data-type="bid">
-                                    <i class="fas fa-gavel"></i> Bid Documents
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="ai-analysis-options">
-                            <h4>AI Analysis Options</h4>
-                            <div class="ai-options">
+                        <div style="margin: 2rem 0;">
+                            <h4 style="margin-bottom: 1rem;">AI Analysis Options</h4>
+                            <div class="checkbox-group">
                                 <label class="checkbox">
                                     <input type="checkbox" id="extractText" checked>
                                     <span>Extract Text & Data</span>
@@ -310,25 +814,12 @@
                                     <input type="checkbox" id="checkAnomalies" checked>
                                     <span>Check for Anomalies</span>
                                 </label>
-                                <label class="checkbox">
-                                    <input type="checkbox" id="compareDatabase">
-                                    <span>Compare with Database</span>
-                                </label>
                             </div>
-
-                            <div class="agent-selection">
-                                <label>Select AI Agent:</label>
-                                <select id="aiAgent">
-                                    <option value="agent1">Agent 1 (Deep Analysis)</option>
-                                    <option value="agent2">Agent 2 (Fast Verification)</option>
-                                    <option value="both">Both Agents</option>
-                                </select>
-                            </div>
-
-                            <button class="btn btn-primary" id="analyzeDocsBtn">
-                                <i class="fas fa-robot"></i> Start AI Analysis
-                            </button>
                         </div>
+
+                        <button class="btn btn-primary" id="analyzeDocsBtn" style="width: 100%;">
+                            <i class="fas fa-robot"></i> Start AI Analysis
+                        </button>
                     </div>
                 </div>
 
@@ -363,30 +854,30 @@
                             <i class="fas fa-brain" style="color: #1976d2;"></i>
                         </div>
                         <h3>Agent 1</h3>
-                        <span class="agent-status active">Active</span>
+                        <span class="agent-status">Active</span>
                     </div>
                     <div class="agent-body">
                         <p><strong>Specialization:</strong> Deep Analysis & Pattern Recognition</p>
-                        <p><strong>Capabilities:</strong></p>
-                        <ul>
+                        <p style="margin-top: 0.5rem;"><strong>Capabilities:</strong></p>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
                             <li>Complex document analysis</li>
                             <li>Family network detection</li>
                             <li>Historical pattern analysis</li>
                             <li>Risk prediction modeling</li>
                         </ul>
-                        <div class="agent-stats">
-                            <div class="stat">
-                                <span class="stat-value">98.7%</span>
-                                <span class="stat-label">Accuracy</span>
+                        <div style="display: flex; gap: 2rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e0e0e0;">
+                            <div style="text-align: center;">
+                                <div style="font-size: 1.5rem; font-weight: 700; color: #1976d2;">98.7%</div>
+                                <div style="font-size: 0.75rem; color: #5c6bc0;">Accuracy</div>
                             </div>
-                            <div class="stat">
-                                <span class="stat-value">1,247</span>
-                                <span class="stat-label">Analyses</span>
+                            <div style="text-align: center;">
+                                <div style="font-size: 1.5rem; font-weight: 700; color: #1976d2;">1,247</div>
+                                <div style="font-size: 0.75rem; color: #5c6bc0;">Analyses</div>
                             </div>
                         </div>
                     </div>
                     <div class="agent-footer">
-                        <button class="btn btn-primary agent-action" data-agent="agent1">
+                        <button class="btn btn-primary agent-action" data-agent="agent1" style="width: 100%;">
                             <i class="fas fa-play"></i> Run Analysis
                         </button>
                     </div>
@@ -398,73 +889,32 @@
                             <i class="fas fa-bolt" style="color: #7b1fa2;"></i>
                         </div>
                         <h3>Agent 2</h3>
-                        <span class="agent-status active">Active</span>
+                        <span class="agent-status">Active</span>
                     </div>
                     <div class="agent-body">
                         <p><strong>Specialization:</strong> Fast Verification & Real-time Monitoring</p>
-                        <p><strong>Capabilities:</strong></p>
-                        <ul>
+                        <p style="margin-top: 0.5rem;"><strong>Capabilities:</strong></p>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
                             <li>Real-time data verification</li>
                             <li>Quick red flag detection</li>
                             <li>Live project monitoring</li>
                             <li>Instant anomaly alerts</li>
                         </ul>
-                        <div class="agent-stats">
-                            <div class="stat">
-                                <span class="stat-value">95.2%</span>
-                                <span class="stat-label">Accuracy</span>
+                        <div style="display: flex; gap: 2rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e0e0e0;">
+                            <div style="text-align: center;">
+                                <div style="font-size: 1.5rem; font-weight: 700; color: #7b1fa2;">95.2%</div>
+                                <div style="font-size: 0.75rem; color: #5c6bc0;">Accuracy</div>
                             </div>
-                            <div class="stat">
-                                <span class="stat-value">892</span>
-                                <span class="stat-label">Verifications</span>
+                            <div style="text-align: center;">
+                                <div style="font-size: 1.5rem; font-weight: 700; color: #7b1fa2;">892</div>
+                                <div style="font-size: 0.75rem; color: #5c6bc0;">Verifications</div>
                             </div>
                         </div>
                     </div>
                     <div class="agent-footer">
-                        <button class="btn btn-primary agent-action" data-agent="agent2">
+                        <button class="btn btn-primary agent-action" data-agent="agent2" style="width: 100%;">
                             <i class="fas fa-play"></i> Run Verification
                         </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h3>AI Agent Console</h3>
-                </div>
-                <div class="card-body">
-                    <div class="console-container">
-                        <div class="console-output" id="agentConsole">
-                            <div class="console-message agent1">
-                                <span class="console-time">[12:45:23]</span>
-                                <span class="console-agent">Agent 1:</span>
-                                <span>System initialized. Ready for deep analysis tasks.</span>
-                            </div>
-                            <div class="console-message agent2">
-                                <span class="console-time">[12:45:25]</span>
-                                <span class="console-agent">Agent 2:</span>
-                                <span>Real-time monitoring active. All systems nominal.</span>
-                            </div>
-                        </div>
-                        
-                        <div class="console-input">
-                            <input type="text" id="agentCommand" placeholder="Enter command for AI agents...">
-                            <button id="sendCommand" class="btn btn-primary">
-                                <i class="fas fa-paper-plane"></i> Send
-                            </button>
-                        </div>
-
-                        <div class="console-actions">
-                            <button class="btn btn-secondary" id="clearConsole">
-                                <i class="fas fa-trash"></i> Clear Console
-                            </button>
-                            <button class="btn btn-secondary" id="testAgents">
-                                <i class="fas fa-vial"></i> Test Both Agents
-                            </button>
-                            <button class="btn btn-secondary" id="exportLogs">
-                                <i class="fas fa-download"></i> Export Logs
-                            </button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -489,7 +939,7 @@
         </div>
     </footer>
 
-    <!-- Toast Notifications -->
+    <!-- Toast Container -->
     <div id="toastContainer"></div>
 
     <!-- Loading Overlay -->
@@ -500,6 +950,335 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('BATHALA Intelligence Platform loaded');
+            
+            // Mobile Menu Toggle
+            const menuToggle = document.getElementById('menuToggle');
+            const mobileNav = document.getElementById('mobileNav');
+            
+            menuToggle.addEventListener('click', () => {
+                mobileNav.classList.toggle('active');
+            });
+            
+            // Navigation
+            document.querySelectorAll('.mobile-nav a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const sectionId = link.getAttribute('href').substring(1);
+                    showSection(sectionId);
+                    mobileNav.classList.remove('active');
+                });
+            });
+            
+            // Contractor Form
+            const contractorForm = document.getElementById('contractorForm');
+            if (contractorForm) {
+                contractorForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    processContractorVetting();
+                });
+            }
+            
+            // Document Upload
+            const uploadArea = document.getElementById('uploadArea');
+            const documentUpload = document.getElementById('documentUpload');
+            
+            if (documentUpload) {
+                documentUpload.addEventListener('change', (e) => {
+                    handleFileUpload(e.target.files);
+                });
+            }
+            
+            // Document Analysis
+            const analyzeBtn = document.getElementById('analyzeDocsBtn');
+            if (analyzeBtn) {
+                analyzeBtn.addEventListener('click', analyzeDocuments);
+            }
+            
+            // AI Agents
+            document.querySelectorAll('.agent-action').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const agent = e.currentTarget.dataset.agent;
+                    runAIAgent(agent);
+                });
+            });
+            
+            // Initialize with dashboard
+            showSection('dashboard');
+        });
+        
+        // Show Section
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+                window.location.hash = sectionId;
+            }
+        }
+        
+        // Process Contractor Vetting
+        async function processContractorVetting() {
+            showLoading(true);
+            
+            try {
+                const contractorName = document.getElementById('contractorName').value;
+                
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                // Mock results
+                const vettingResult = {
+                    contractorName: contractorName,
+                    secStatus: 'Valid',
+                    pcabStatus: 'Active',
+                    philgepsStatus: 'Registered',
+                    riskLevel: Math.random() > 0.5 ? 'LOW' : 'HIGH',
+                    familyNetwork: Math.random() > 0.7 ? ['Company A', 'Company B'] : null,
+                    anomalies: Math.random() > 0.8 ? ['Multiple bids on same project'] : []
+                };
+                
+                displayVettingResults(vettingResult);
+                showToast('Contractor vetting completed successfully!', 'success');
+                
+            } catch (error) {
+                console.error('Error:', error);
+                showToast('Error processing contractor vetting', 'error');
+            } finally {
+                showLoading(false);
+            }
+        }
+        
+        // Handle File Upload
+        function handleFileUpload(files) {
+            if (files.length === 0) return;
+            
+            const fileList = Array.from(files).map(file => ({
+                name: file.name,
+                size: file.size,
+                type: file.type
+            }));
+            
+            // Update UI
+            const uploadArea = document.getElementById('uploadArea');
+            if (uploadArea) {
+                uploadArea.innerHTML = `
+                    <i class="fas fa-check-circle" style="color: #388e3c;"></i>
+                    <h4>${files.length} file(s) uploaded</h4>
+                    <p>Ready for AI analysis</p>
+                `;
+            }
+            
+            showToast(`Uploaded ${files.length} file(s) successfully`, 'success');
+        }
+        
+        // Analyze Documents
+        async function analyzeDocuments() {
+            showLoading(true);
+            
+            try {
+                // Simulate AI analysis
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Mock results
+                const analysisResult = {
+                    documentsAnalyzed: 3,
+                    textExtraction: { success: true, confidence: 95.5 },
+                    authenticity: { verified: true, confidence: 98.2 },
+                    anomalies: { count: 0 },
+                    findings: [
+                        { type: 'success', message: 'Document appears authentic and complete' },
+                        { type: 'success', message: 'All required signatures present' }
+                    ]
+                };
+                
+                displayAnalysisResults(analysisResult);
+                showToast('AI analysis completed successfully!', 'success');
+                
+            } catch (error) {
+                console.error('Error:', error);
+                showToast('Error analyzing documents', 'error');
+            } finally {
+                showLoading(false);
+            }
+        }
+        
+        // Run AI Agent
+        async function runAIAgent(agentId) {
+            showLoading(true);
+            
+            try {
+                // Simulate AI processing
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                const messages = {
+                    agent1: 'Deep analysis completed. Pattern detection algorithm engaged.',
+                    agent2: 'Real-time verification completed. All systems nominal.'
+                };
+                
+                showToast(`${agentId === 'agent1' ? 'Agent 1' : 'Agent 2'} analysis completed`, 'success');
+                
+            } catch (error) {
+                console.error('Error:', error);
+                showToast('AI Agent error', 'error');
+            } finally {
+                showLoading(false);
+            }
+        }
+        
+        // Display Vetting Results
+        function displayVettingResults(results) {
+            const resultsContainer = document.getElementById('vettingResults');
+            if (!resultsContainer) return;
+            
+            const riskClass = results.riskLevel.toLowerCase();
+            
+            resultsContainer.innerHTML = `
+                <div style="background: white; padding: 1.5rem; border-radius: 8px; border: 2px solid ${riskClass === 'high' ? '#ffebee' : riskClass === 'medium' ? '#fff3e0' : '#e8f5e9'};">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h4 style="color: #1a237e; font-size: 1.125rem;">${results.contractorName}</h4>
+                        <span class="risk-badge ${riskClass}">${results.riskLevel} RISK</span>
+                    </div>
+                    
+                    <div style="display: grid; gap: 0.75rem; margin-bottom: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>SEC Registration:</span>
+                            <span style="color: ${results.secStatus === 'Valid' ? '#388e3c' : '#d32f2f'}; font-weight: 600;">
+                                ${results.secStatus}
+                            </span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>PCAB License:</span>
+                            <span style="color: ${results.pcabStatus === 'Active' ? '#388e3c' : '#d32f2f'}; font-weight: 600;">
+                                ${results.pcabStatus}
+                            </span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>PhilGEPS:</span>
+                            <span style="color: ${results.philgepsStatus === 'Registered' ? '#388e3c' : '#d32f2f'}; font-weight: 600;">
+                                ${results.philgepsStatus}
+                            </span>
+                        </div>
+                    </div>
+                    
+                    ${results.familyNetwork ? `
+                    <div style="background: #fff3e0; padding: 0.75rem; border-radius: 6px; margin-bottom: 1rem;">
+                        <strong>⚠️ Family Network Detected:</strong>
+                        <div style="font-size: 0.875rem; margin-top: 0.25rem;">
+                            ${results.familyNetwork.length} related companies
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    ${results.anomalies.length > 0 ? `
+                    <div style="background: #ffebee; padding: 0.75rem; border-radius: 6px;">
+                        <strong>🚨 Anomalies Found:</strong>
+                        <ul style="margin-left: 1.25rem; margin-top: 0.25rem; font-size: 0.875rem;">
+                            ${results.anomalies.map(anomaly => `<li>${anomaly}</li>`).join('')}
+                        </ul>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+        
+        // Display Analysis Results
+        function displayAnalysisResults(results) {
+            const resultsContainer = document.getElementById('analysisResults');
+            if (!resultsContainer) return;
+            
+            resultsContainer.innerHTML = `
+                <div style="background: white; padding: 1.5rem; border-radius: 8px; border: 2px solid #e8f5e9;">
+                    <h4 style="color: #1a237e; margin-bottom: 1rem; font-size: 1.125rem;">Document Analysis Complete</h4>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 1.5rem;">
+                        <div style="text-align: center; padding: 0.75rem; background: #f5f7fa; border-radius: 6px;">
+                            <div style="font-size: 1.25rem; font-weight: 700; color: #1a237e;">${results.documentsAnalyzed}</div>
+                            <div style="font-size: 0.75rem; color: #5c6bc0;">Documents</div>
+                        </div>
+                        <div style="text-align: center; padding: 0.75rem; background: #f5f7fa; border-radius: 6px;">
+                            <div style="font-size: 1.25rem; font-weight: 700; color: #388e3c;">${results.textExtraction.confidence}%</div>
+                            <div style="font-size: 0.75rem; color: #5c6bc0;">Accuracy</div>
+                        </div>
+                        <div style="text-align: center; padding: 0.75rem; background: #f5f7fa; border-radius: 6px;">
+                            <div style="font-size: 1.25rem; font-weight: 700; color: #388e3c;">${results.authenticity.confidence}%</div>
+                            <div style="font-size: 0.75rem; color: #5c6bc0;">Authenticity</div>
+                        </div>
+                        <div style="text-align: center; padding: 0.75rem; background: #f5f7fa; border-radius: 6px;">
+                            <div style="font-size: 1.25rem; font-weight: 700; color: ${results.anomalies.count > 0 ? '#d32f2f' : '#388e3c'};">${results.anomalies.count}</div>
+                            <div style="font-size: 0.75rem; color: #5c6bc0;">Anomalies</div>
+                        </div>
+                    </div>
+                    
+                    <h5 style="margin-bottom: 0.75rem; color: #1a237e;">Key Findings:</h5>
+                    <div style="display: grid; gap: 0.5rem;">
+                        ${results.findings.map(finding => `
+                            <div style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; background: #e8f5e9; border-radius: 6px;">
+                                <i class="fas fa-check-circle" style="color: #388e3c;"></i>
+                                <span>${finding.message}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Show Loading Overlay
+        function showLoading(show) {
+            const overlay = document.getElementById('loadingOverlay');
+            if (overlay) {
+                overlay.classList.toggle('active', show);
+            }
+        }
+        
+        // Show Toast Notification
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            if (!container) return;
+            
+            const icon = type === 'success' ? 'check-circle' :
+                        type === 'error' ? 'times-circle' :
+                        type === 'warning' ? 'exclamation-triangle' : 'info-circle';
+            
+            const color = type === 'success' ? '#388e3c' :
+                         type === 'error' ? '#d32f2f' :
+                         type === 'warning' ? '#f57c00' : '#1a237e';
+            
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.style.borderLeft = `4px solid ${color}`;
+            toast.innerHTML = `
+                <i class="fas fa-${icon}" style="color: ${color};"></i>
+                <span>${message}</span>
+            `;
+            
+            container.appendChild(toast);
+            
+            // Remove after 5 seconds
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.parentNode.removeChild(toast);
+                    }
+                }, 300);
+            }, 5000);
+        }
+        
+        // Handle hash changes
+        window.addEventListener('hashchange', () => {
+            const sectionId = window.location.hash.substring(1) || 'dashboard';
+            showSection(sectionId);
+        });
+    </script>
 </body>
 </html>
